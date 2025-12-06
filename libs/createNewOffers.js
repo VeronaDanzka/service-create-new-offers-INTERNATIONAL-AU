@@ -111,7 +111,7 @@ async function createDataItems(newListing, supplier){
             .map(cat => cat.translations.find(t => t.lang === 'en')?.name)
             .filter(Boolean)
             .join(' ');
-        const matchEbayCat = mappingEbayCategories.find(data => data.rawPathFR === catalogRawPathUS)
+        const matchEbayCat = mappingEbayCategories.find(data => data.rawPathUS === catalogRawPathUS)
         const requestCat = `SELECT name FROM category_${SUPPLIER_BASE}_translate
                           WHERE category_name = $1
                             AND lang = 'en'`;
@@ -151,7 +151,7 @@ async function createDataItems(newListing, supplier){
         const fabricantGarantyUS = "2 years"
         const cloud_imgUS = cloud_img
         const priceEURn = priceMarginD(dealer_price, weight || 0)
-        const priceEUR = priceEURn * Number(FX_2)
+        const priceEUR = priceEURn * Number(FX_1)
         const priceCHF = priceEUR.toFixed(2);
         const returnPolicy = RETURNPOLICY
         const shippingProfile = SHIPPINGPROFILE
@@ -329,7 +329,7 @@ async function createDataItems(newListing, supplier){
           departmentUS = 'Women'
         }
         const normalizedName = addUnderscores(translatedName)
-        const normalizedDescription = addUnderscores(translatedDescription)
+        const normalizedDescription = addUnderscores(fullDescription)
         const normalizedcategoryUS = addUnderscores(categoryUS)
         const normalizedTitle = normalizeWords(normalizedcategoryUS) + ' ' + normalizeWords(translatedName) + ' +1 surprise gift'
         const title = normalizedTitle.length > 80 ? normalizeWords(normalizedName) : normalizedTitle
@@ -351,7 +351,7 @@ async function createDataItems(newListing, supplier){
         const cloud_imgUS = cloud_img
         const dealerTVA = Number(dealer_price) / 1.20
         const priceGBP = priceMarginX(dealerTVA, weight)
-        const priceCHF = (priceGBP * Number(FX_1)).toFixed(2);
+        const priceCHF = (priceGBP * Number(FX_2)).toFixed(2);
         const returnPolicy = RETURNPOLICY
         const shippingProfile = SHIPPINGPROFILE
         const paymentPolicyId = PAYMENTPOLICY
