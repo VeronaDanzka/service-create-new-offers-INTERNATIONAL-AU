@@ -1,4 +1,4 @@
-import { REMOVE, REPLACE } from './data/restrictedWords.js';
+import { REMOVE, REPLACE } from '../data/restrictedWords.js';
 // ------------------------------------------------------------------
 // 2. regex commune : on échappe les caractères spéciaux puis on
 //    assemble toutes les expressions (les plus longues d’abord)
