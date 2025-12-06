@@ -281,9 +281,8 @@ async function createDataItems(newListing, supplier){
             }))
         const requestProduct = `
           SELECT name, description
-          FROM products_${SUPPLIER_1}_translate
+          FROM products_${SUPPLIER_1}
           WHERE sku = $1
-            AND lang = 'en';
         `;
         const [row] = await sql([requestProduct], sku);
         if (!row || !row.name || !row.description){
