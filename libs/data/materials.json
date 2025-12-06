@@ -1,0 +1,20 @@
+{
+    "nailon": "Nylon",
+    "roica": "Roica",
+    "poliamida": "Polyamide",
+    "poliester": "Polyester",
+    "spandex": "Spandex",
+    "elastano": "Elastane",
+    "abs": "ABS",
+    "cuero": "Leather",
+    "hierro": "Metal",
+    "metal": "Metal",
+    "pvc": "PVC",
+    "caucho": "Rubber",
+    "econyl": "Econyl",
+    "silicona": "Silicone",
+    "acero inoxidable": "Stainless Steel",
+    "tpr": "Thermoplastic Elastomer (TPE)",
+    "tpe": "Thermoplastic Elastomer (TPE)",
+    "zinc": "Zinc"
+}
