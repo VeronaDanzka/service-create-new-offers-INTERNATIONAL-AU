@@ -516,6 +516,7 @@ async function createNewItems() {
   /* 2) envoi des paquets de 25                                          */
   /* ------------------------------------------------------------------ */
   const headers = await getAuthHeaders();
+  headers['X-eBay-C-Marketplace-Id'] = MARKETPLACE;
   const inventoryChunks = chunk(payloadsFullInventory, 25);
   const offerChunks     = chunk(payloadsFullOffers,     25);
 
