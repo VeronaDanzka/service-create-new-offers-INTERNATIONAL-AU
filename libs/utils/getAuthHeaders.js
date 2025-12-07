@@ -21,7 +21,7 @@ export async function getAuthHeaders() {
     Authorization: `Bearer ${tokenCache.access_token}`,
     'Content-Type': 'application/json',
     Accept: 'application/json',
-    'Accept-Language': 'fr-FR',
-    'Content-Language': 'fr-FR'
+    'Accept-Language': 'de-CH',
+    'Content-Language': 'de-CH'
   };
 };
