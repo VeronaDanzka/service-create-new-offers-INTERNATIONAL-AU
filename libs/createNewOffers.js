@@ -24,7 +24,9 @@ const {
   LOCALE,
   RETURNPOLICY,
   SHIPPINGPROFILE,
-  PAYMENTPOLICY } = process.env;
+  PAYMENTPOLICY,
+  LIMIT_D,
+  LIMIT_X } = process.env;
 
 
 
@@ -147,12 +149,12 @@ async function createDataItems(newListing, supplier){
         const normalizedBrand = normalizeWords(itemBrand);
         const colorUS = colorListUS[color]
         const quantity = stock > 5 ? 5 : stock
-        const skuUS = sku + `-${SUPPLIER_BASE}-CH-WORLD`
+        const skuUS = sku + `-${SUPPLIER_BASE}-AU-WORLD`
         const fabricantGarantyUS = "2 years"
         const cloud_imgUS = cloud_img
         const priceEURn = priceMarginD(dealer_price, weight || 0)
         const priceEUR = priceEURn * Number(FX_1)
-        const priceCHF = priceEUR.toFixed(2);
+        const priceAUD = priceEUR.toFixed(2);
         const returnPolicy = RETURNPOLICY
         const shippingProfile = SHIPPINGPROFILE
         const paymentPolicyId = PAYMENTPOLICY
@@ -177,16 +179,16 @@ async function createDataItems(newListing, supplier){
               locale: LOCALE,
               product: {
                 aspects: {
-                  ...(normalizedBrand && { Marke: [normalizedBrand] }),
-                  ...(TypeUS  && { Produktart: [TypeUS]  }),
-                  ...(colorUS && { Farbe: [colorUS] }),
-                  ...(size && { Größe: [size] }),
+                  ...(normalizedBrand && { Brand: [normalizedBrand] }),
+                  ...(TypeUS  && { Type: [TypeUS]  }),
+                  ...(colorUS && { Colour: [colorUS] }),
+                  ...(size && { Size: [size] }),
                   ...(materialUS.length && { Material: materialUS }),
-                  ...(departmentUS && { Abteilung: [departmentUS] }),
-                  ...(BaseUS && { Basis: [BaseUS]}),
-                  ...(PerfumeNameUS && { Parfümname: [PerfumeNameUS]}),
-                  ...(VolumeUS && { Inhalt: [VolumeUS]}),
-                  ...(fabricantGarantyUS && { Herstellergarantie: [fabricantGarantyUS]})
+                  ...(departmentUS && { Department: [departmentUS] }),
+                  ...(BaseUS && { Base: [BaseUS]}),
+                  ...(PerfumeNameUS && { PerfumeName: [PerfumeNameUS]}),
+                  ...(VolumeUS && { Volume: [VolumeUS]}),
+                  ...(fabricantGarantyUS && { "Manufacturer Warranty": [fabricantGarantyUS]})
                 },
                 ean: [ean],
                 imageUrls: cloud_imgUS,
@@ -217,7 +219,7 @@ async function createDataItems(newListing, supplier){
                 pricingSummary: {
                   price: {
                     currency: CURRENCY,
-                    value: String(priceCHF)
+                    value: String(priceAUD)
                   },
                 },
                 // "regulatory": {
@@ -345,12 +347,12 @@ async function createDataItems(newListing, supplier){
         const normalizedBrand = normalizeWords(itemBrand);
         const colorUS = colorListXUS[color]
         const quantity = stock > 5 ? 5 : stock
-        const skuUS = sku + `-${SUPPLIER_1}-CH-WORLD`
+        const skuUS = sku + `-${SUPPLIER_1}-AU-WORLD`
         const fabricantGarantyUS = "2 years"
         const cloud_imgUS = cloud_img
         const dealerTVA = Number(dealer_price) / 1.20
         const priceGBP = priceMarginX(dealerTVA, weight)
-        const priceCHF = (priceGBP * Number(FX_2)).toFixed(2);
+        const priceAUD = (priceGBP * Number(FX_2)).toFixed(2);
         const returnPolicy = RETURNPOLICY
         const shippingProfile = SHIPPINGPROFILE
         const paymentPolicyId = PAYMENTPOLICY
@@ -373,16 +375,16 @@ async function createDataItems(newListing, supplier){
               locale: LOCALE,
               product: {
                 aspects: {
-                  ...(normalizedBrand && { Marke: [normalizedBrand] }),
-                  ...(TypeUS  && { Produktart: [TypeUS]  }),
-                  ...(colorUS && { Farbe: [colorUS] }),
-                  ...(size && { Größe: [size] }),
+                  ...(normalizedBrand && { Brand: [normalizedBrand] }),
+                  ...(TypeUS  && { Type: [TypeUS]  }),
+                  ...(colorUS && { Colour: [colorUS] }),
+                  ...(size && { Size: [size] }),
                   ...(materialUS.length && { Material: materialUS }),
-                  ...(departmentUS && { Abteilung: [departmentUS] }),
-                  ...(BaseUS && { Basis: [BaseUS]}),
-                  ...(PerfumeNameUS && { Parfümname: [PerfumeNameUS]}),
-                  ...(VolumeUS && { Inhalt: [VolumeUS]}),
-                  ...(fabricantGarantyUS && { Herstellergarantie: [fabricantGarantyUS]})
+                  ...(departmentUS && { Department: [departmentUS] }),
+                  ...(BaseUS && { Base: [BaseUS]}),
+                  ...(PerfumeNameUS && { PerfumeName: [PerfumeNameUS]}),
+                  ...(VolumeUS && { Volume: [VolumeUS]}),
+                  ...(fabricantGarantyUS && { "Manufacturer Warranty": [fabricantGarantyUS]})
                 },
                 ean: [ean],
                 imageUrls: cloud_imgUS,
@@ -412,7 +414,7 @@ async function createDataItems(newListing, supplier){
                 pricingSummary: {
                   price: {
                     currency: CURRENCY,
-                    value: String(priceCHF)
+                    value: String(priceAUD)
                   },
                 },
                 // "regulatory": {
@@ -466,8 +468,8 @@ async function createNewItems() {
   /* 1) calcul des nouveaux listings                                    */
   /* ------------------------------------------------------------------ */
   const items = await getEbayItems();
-  const suppD_sku = `-${SUPPLIER_BASE}-CH-WORLD`
-  const suppX_sku = `-${SUPPLIER_1}-CH-WORLD`
+  const suppD_sku = `-${SUPPLIER_BASE}-AU-WORLD`
+  const suppX_sku = `-${SUPPLIER_1}-AU-WORLD`
   const normalizeSkuFRD = sku => sku.replace(suppD_sku, '');
   const normalizeSkuFRX = sku => sku.replace(suppX_sku, '');
   const tableD = `products_${SUPPLIER_BASE}`;
@@ -491,9 +493,6 @@ async function createNewItems() {
   console.log(`Payloads INVENTORY à créer pour ${SUPPLIER_1} : `, payloadsInventoryArrayX.length);
   console.log(`Payloads OFFERS à créer pour ${SUPPLIER_1} : `, payloadsOffersArrayX.length);
 
-  // Limites
-  const LIMIT_D = 1660;
-  const LIMIT_X = 830;
 
   // INVENTORY
   const limitedInventoryD = payloadsInventoryArrayD.slice(0, LIMIT_D);
