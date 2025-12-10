@@ -312,7 +312,7 @@ async function createDataItems(newListing, supplier){
         const rowsCats = await sql([requestCat], category_id);
         const categoryUS = rowsCats.length > 0 ? rowsCats[0].name : '';
         if(!categoryUS || !matchEbayCat || !cloud_img) continue;
-        const { category_idUS = null, rawPathUS = null, TypeUS = null, BaseUS = null, StyleUS = null, ProduitUS = null } = matchEbayCat
+        const { category_idUS = null, rawPathUS = null, TypeUS = null, BaseUS = null, StyleUS = null, SizeTypeUS = null, ProduitUS = null } = matchEbayCat
         let departmentUS = 'Unisex'
         if(rawPathUS.includes(' Men') || rawPathUS.includes(' men')){
           departmentUS = 'Men'
