@@ -122,12 +122,6 @@ async function createDataItems(newListing, supplier){
         if(!categoryUS || !matchEbayCat || !cloud_img){
           continue;}
         const { category_idUS = null, rawPathUS = null, TypeUS = null, BaseUS = null, StyleUS = null, ProduitUS = null } = matchEbayCat
-        if(rawPathUS && (rawPathUS.toLowerCase().includes("fashion") || rawPathUS.toLowerCase().includes("lingerie"))){
-          continue;}
-        if(rawPathUS && (rawPathUS.toLowerCase().includes("realistic") || rawPathUS.toLowerCase().includes("vaginas") || rawPathUS.toLowerCase().includes("inflatable dolls"))){
-          continue;}
-        if(rawPathUS && (rawPathUS.toLowerCase().includes("assorted items"))){
-          continue;}
         let departmentUS = 'Unisex'
         if(rawPathUS.includes(' Men') || rawPathUS.includes(' men')){
           departmentUS = 'Men'
@@ -316,12 +310,6 @@ async function createDataItems(newListing, supplier){
         const categoryUS = rowsCats.length > 0 ? rowsCats[0].name : '';
         if(!categoryUS || !matchEbayCat || !cloud_img) continue;
         const { category_idUS = null, rawPathUS = null, TypeUS = null, BaseUS = null, StyleUS = null, ProduitUS = null } = matchEbayCat
-        if(rawPathUS && (rawPathUS.toLowerCase().includes("fashion") || rawPathUS.toLowerCase().includes("lingerie"))){
-          continue;}
-        if(rawPathUS && (rawPathUS.toLowerCase().includes("realistic") || rawPathUS.toLowerCase().includes("vaginas") || rawPathUS.toLowerCase().includes("inflatable dolls"))){
-          continue;}
-        if(rawPathUS && (rawPathUS.toLowerCase().includes("assorted items"))){
-          continue;}
         let departmentUS = 'Unisex'
         if(rawPathUS.includes(' Men') || rawPathUS.includes(' men')){
           departmentUS = 'Men'
