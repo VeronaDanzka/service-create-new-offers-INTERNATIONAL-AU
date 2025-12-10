@@ -121,7 +121,7 @@ async function createDataItems(newListing, supplier){
         const categoryUS = rowsCats.length > 0 ? rowsCats[0].name : '';
         if(!categoryUS || !matchEbayCat || !cloud_img){
           continue;}
-        const { category_idUS = null, rawPathUS = null, TypeUS = null, BaseUS = null, StyleUS = null, ProduitUS = null } = matchEbayCat
+        const { category_idUS = null, rawPathUS = null, TypeUS = null, BaseUS = null, StyleUS = null, ProduitUS = null, SizeTypeUS = null } = matchEbayCat
         let departmentUS = 'Unisex'
         if(rawPathUS.includes(' Men') || rawPathUS.includes(' men')){
           departmentUS = 'Men'
@@ -175,14 +175,17 @@ async function createDataItems(newListing, supplier){
                 aspects: {
                   ...(normalizedBrand && { Brand: [normalizedBrand] }),
                   ...(TypeUS  && { Type: [TypeUS]  }),
-                  ...(colorUS && { Colour: [colorUS] }),
+                  ...(colorUS && { Color: [colorUS] }),
                   ...(size && { Size: [size] }),
+                  ...(SizeTypeUS && { "Size Type": [SizeTypeUS] }),
                   ...(materialUS.length && { Material: materialUS }),
                   ...(departmentUS && { Department: [departmentUS] }),
-                  ...(BaseUS && { Base: [BaseUS]}),
-                  ...(PerfumeNameUS && { PerfumeName: [PerfumeNameUS]}),
-                  ...(VolumeUS && { Volume: [VolumeUS]}),
-                  ...(fabricantGarantyUS && { "Manufacturer Warranty": [fabricantGarantyUS]})
+                  ...(BaseUS && { Base: [BaseUS] }),
+                  ...(StyleUS && { Style: [StyleUS] }),
+                  ...(PerfumeNameUS && { "Fragrance Name": [PerfumeNameUS] }),
+                  ...(VolumeUS && { Volume: [VolumeUS] }),
+                  ...(ProduitUS && { Product: [ProduitUS] }),
+                  ...(fabricantGarantyUS && { "Manufacturer Warranty": [fabricantGarantyUS] })
                 },
                 ean: [ean],
                 imageUrls: cloud_imgUS,
@@ -365,14 +368,17 @@ async function createDataItems(newListing, supplier){
                 aspects: {
                   ...(normalizedBrand && { Brand: [normalizedBrand] }),
                   ...(TypeUS  && { Type: [TypeUS]  }),
-                  ...(colorUS && { Colour: [colorUS] }),
+                  ...(colorUS && { Color: [colorUS] }),
                   ...(size && { Size: [size] }),
+                  ...(SizeTypeUS && { "Size Type": [SizeTypeUS] }),
                   ...(materialUS.length && { Material: materialUS }),
                   ...(departmentUS && { Department: [departmentUS] }),
-                  ...(BaseUS && { Base: [BaseUS]}),
-                  ...(PerfumeNameUS && { PerfumeName: [PerfumeNameUS]}),
-                  ...(VolumeUS && { Volume: [VolumeUS]}),
-                  ...(fabricantGarantyUS && { "Manufacturer Warranty": [fabricantGarantyUS]})
+                  ...(BaseUS && { Base: [BaseUS] }),
+                  ...(StyleUS && { Style: [StyleUS] }),
+                  ...(PerfumeNameUS && { "Fragrance Name": [PerfumeNameUS] }),
+                  ...(VolumeUS && { Volume: [VolumeUS] }),
+                  ...(ProduitUS && { Product: [ProduitUS] }),
+                  ...(fabricantGarantyUS && { "Manufacturer Warranty": [fabricantGarantyUS] })
                 },
                 ean: [ean],
                 imageUrls: cloud_imgUS,
